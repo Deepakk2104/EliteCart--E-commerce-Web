@@ -24,7 +24,6 @@ function DashboardTab() {
     const goToAdd = () => {
         window.location.href = '/addproduct'
     }
-
     return (
         <div >
             <div className="container mx-auto">
