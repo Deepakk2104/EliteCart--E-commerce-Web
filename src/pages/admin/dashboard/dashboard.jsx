@@ -32,7 +32,7 @@ function Dashboard() {
                     color: mode === "dark" ? "white" : "",
                   }}
                 >
-                  10
+                  16
                 </h2>
                 <p
                   className=" text-purple-500  font-bold"
