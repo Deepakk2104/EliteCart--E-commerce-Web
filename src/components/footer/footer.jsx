@@ -5,7 +5,7 @@ import myContext from "../../context/data/myContext";
 
 function Footer() {
   const context = useContext(myContext);
-  const {mode} = context;
+  const { mode } = context;
 
   return (
     <div>
@@ -137,7 +137,7 @@ function Footer() {
                   className=" text-2xl font-bold text-black  px-2 py-1 rounded"
                   style={{ color: mode === "dark" ? "white" : "" }}
                 >
-                 Elitecart
+                  Elitecart
                 </h1>
               </div>
             </Link>

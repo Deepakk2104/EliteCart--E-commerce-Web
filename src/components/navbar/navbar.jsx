@@ -20,7 +20,7 @@ export default function Navbar() {
     window.location.href = "/login";
   };
 
-  const cartItems = useSelector((state) => state.cart)
+  const cartItems = useSelector((state) => state.cart);
   return (
     <div className="bg-white sticky top-0 z-50">
       {/* Mobile menu */}
@@ -113,15 +113,15 @@ export default function Navbar() {
                       to={"/login"}
                       className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
                     >
-                      <span 
-                      >Login/Signup</span>
+                      <span>Login/Signup</span>
                     </Link>
                   </div>
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
-                    <img                      src="https://i.postimg.cc/vmWP1sFR/1721560431160.png"
+                    <img
+                      src="https://i.postimg.cc/vmWP1sFR/1721560431160.png"
                       alt=""
                       className="block h-auto w-48 flex-shrink-0"
                     />
@@ -203,7 +203,7 @@ export default function Navbar() {
                     className="text-sm font-medium text-gray-700"
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                     All Products
+                    All Products
                   </Link>
                   <Link
                     to={"/order"}
@@ -238,14 +238,12 @@ export default function Navbar() {
                   <Link
                     to={"/login"}
                     className="text-sm font-medium text-gray-700"
-                    style={{ color: mode === "dark" ? "white" : "" }}>
-                    <span 
-                    >icon</span>
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    <span>icon</span>
                   </Link>
                 </div>
-                <div className="hidden lg:ml-8 lg:flex">
-                  
-                </div>
+                <div className="hidden lg:ml-8 lg:flex"></div>
 
                 {/* Search and Mode toggle */}
                 <div className="flex lg:ml-6">
