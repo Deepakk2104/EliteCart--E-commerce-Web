@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MyContext from "./myContext";
-import { fireDB } from "../../components/firebase/firebaseconfig";
+import { fireDB } from "../../firebase/firebaseconfig";
 import {
   Timestamp,
   addDoc,
@@ -10,15 +10,13 @@ import {
   query,
   doc,
   deleteDoc,
-  setDoc,
   getDocs,
+  setDoc,
 } from "firebase/firestore";
+
 import { toast } from "react-toastify";
 
-function MyState(props) {
-  // ---------------------------------------------------------
-  // THEME MODE
-  // ---------------------------------------------------------
+function myState(props) {
   const [mode, setMode] = useState("light");
 
   const toggleMode = () => {
@@ -33,15 +31,12 @@ function MyState(props) {
 
   const [loading, setLoading] = useState(false);
 
-  // ---------------------------------------------------------
-  // PRODUCT STATE
-  // ---------------------------------------------------------
   const [products, setProducts] = useState({
-    title: "",
-    price: "",
-    imageUrl: "",
-    category: "",
-    description: "",
+    title: null,
+    price: null,
+    imageUrl: null,
+    category: null,
+    description: null,
     time: Timestamp.now(),
     date: new Date().toLocaleString("en-US", {
       month: "short",
@@ -50,128 +45,133 @@ function MyState(props) {
     }),
   });
 
+  const addProduct = async () => {
+    if (
+      products.title == null ||
+      products.price == null ||
+      products.imageUrl == null ||
+      products.category == null ||
+      products.description == null
+    ) {
+      return toast.error("all fields are required");
+    }
+
+    setLoading(true);
+
+    try {
+      const productRef = collection(fireDB, "products");
+      await addDoc(productRef, products);
+      toast.success("Add product successfully");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 800);
+      getProductData();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+    // setProducts("")
+  };
+
   const [product, setProduct] = useState([]);
 
-  // ⭐ REAL-TIME PRODUCTS LISTENER
-  const getProductData = () => {
+  const getProductData = async () => {
     setLoading(true);
-    try {
-      const q = query(collection(fireDB, "products"), orderBy("time", "desc"));
 
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const arr = [];
-        snapshot.forEach((doc) => {
-          arr.push({ ...doc.data(), id: doc.id });
+    try {
+      const q = query(collection(fireDB, "products"), orderBy("time"));
+
+      const data = onSnapshot(q, (QuerySnapshot) => {
+        let productArray = [];
+        QuerySnapshot.forEach((doc) => {
+          productArray.push({ ...doc.data(), id: doc.id });
         });
-        setProduct(arr);
+        setProduct(productArray);
         setLoading(false);
       });
 
-      return unsubscribe;
+      return () => data;
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
 
-  // ADD PRODUCT
-  const addProduct = async () => {
-    if (
-      !products.title ||
-      !products.price ||
-      !products.imageUrl ||
-      !products.category ||
-      !products.description
-    ) {
-      return toast.error("All fields are required");
-    }
+  useEffect(() => {
+    getProductData();
+  }, []);
 
-    setLoading(true);
-    try {
-      await addDoc(collection(fireDB, "products"), products);
-      toast.success("Product added successfully");
+  // update product function
 
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 700);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-
-  // EDIT PRODUCT
   const edithandle = (item) => {
     setProducts(item);
   };
 
-  // UPDATE PRODUCT
   const updateProduct = async () => {
     setLoading(true);
     try {
       await setDoc(doc(fireDB, "products", products.id), products);
-      toast.success("Product updated");
-
+      toast.success("Product Updated successfully");
       setTimeout(() => {
         window.location.href = "/dashboard";
-      }, 700);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-
-  // DELETE PRODUCT
-  const deleteProduct = async (item) => {
-    setLoading(true);
-    try {
-      await deleteDoc(doc(fireDB, "products", item.id));
-      toast.success("Product deleted");
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-
-  // ---------------------------------------------------------
-  // REAL-TIME ORDERS (FULLY FIXED)
-  // ---------------------------------------------------------
-  const [order, setOrder] = useState([]);
-
-  const getOrderData = () => {
-    setLoading(true);
-    try {
-      const q = query(collection(fireDB, "orders"), orderBy("date", "desc"));
-
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const arr = [];
-        snapshot.forEach((doc) => {
-          arr.push({ ...doc.data(), id: doc.id });
-        });
-        setOrder(arr);
-        setLoading(false);
-      });
-
-      return unsubscribe;
+      }, 800);
+      getProductData();
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
 
-  // ---------------------------------------------------------
-  // USERS (ONE-TIME FETCH — NOT REAL-TIME)
-  // ---------------------------------------------------------
+  // delete product
+
+  const deleteProduct = async (item) => {
+    setLoading(true);
+    try {
+      await deleteDoc(doc(fireDB, "products", item.id));
+      toast.success("Product Deleted successfully");
+      getProductData();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const [order, setOrder] = useState([]);
+
+  const getOrderData = async () => {
+    setLoading(true);
+    try {
+      const result = await getDocs(collection(fireDB, "order"));
+      const ordersArray = [];
+      result.forEach((doc) => {
+        ordersArray.push(doc.data());
+        setLoading(false);
+      });
+      setOrder(ordersArray);
+      console.log(ordersArray);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   const [user, setUser] = useState([]);
 
   const getUserData = async () => {
     setLoading(true);
     try {
-      const res = await getDocs(collection(fireDB, "users"));
-      const arr = [];
-      res.forEach((doc) => arr.push(doc.data()));
-
-      setUser(arr);
+      const result = await getDocs(collection(fireDB, "users"));
+      const usersArray = [];
+      result.forEach((doc) => {
+        usersArray.push(doc.data());
+        setLoading(false);
+      });
+      setUser(usersArray);
+      console.log(usersArray);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -179,30 +179,15 @@ function MyState(props) {
     }
   };
 
-  // ---------------------------------------------------------
-  // MOUNT REAL-TIME LISTENERS
-  // ---------------------------------------------------------
   useEffect(() => {
-    const unsubProducts = getProductData();
-    const unsubOrders = getOrderData();
+    getOrderData();
     getUserData();
-
-    return () => {
-      if (typeof unsubProducts === "function") unsubProducts();
-      if (typeof unsubOrders === "function") unsubOrders();
-    };
   }, []);
 
-  // ---------------------------------------------------------
-  // SEARCH AND FILTERS
-  // ---------------------------------------------------------
   const [searchkey, setSearchkey] = useState("");
   const [filterType, setFilterType] = useState("");
   const [filterPrice, setFilterPrice] = useState("");
 
-  // ---------------------------------------------------------
-  // PROVIDER EXPORT
-  // ---------------------------------------------------------
   return (
     <MyContext.Provider
       value={{
@@ -210,8 +195,6 @@ function MyState(props) {
         toggleMode,
         loading,
         setLoading,
-
-        // products
         products,
         setProducts,
         addProduct,
@@ -219,14 +202,8 @@ function MyState(props) {
         edithandle,
         updateProduct,
         deleteProduct,
-
-        // orders
         order,
-
-        // users
         user,
-
-        // filters
         searchkey,
         setSearchkey,
         filterType,
@@ -240,4 +217,4 @@ function MyState(props) {
   );
 }
 
-export default MyState;
+export default myState;
