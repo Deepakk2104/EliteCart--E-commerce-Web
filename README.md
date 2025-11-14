@@ -1,6 +1,6 @@
 # **EliteCart — E-Commerce Web Application**
 
-A modern, scalable, and fully-functional **e-commerce web application** built with **React (Vite)**, **Redux**, **Firebase**, and **Razorpay**.  
+A modern, scalable, and fully-functional **e-commerce web application** built with **React (Vite)**, **Redux**, **Firebase**, and **Stripe pay**.  
 Designed for speed, reliability, and a smooth shopping experience — includes a complete **Admin Dashboard** for product & order management.
 
 ---
@@ -12,9 +12,9 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 | **Frontend** | React, Vite |
 | **State Management** | Redux |
 | **Backend / Database** | Firebase (Auth, Firestore) |
-| **Payment Gateway** | Razorpay |
+| **Payment Gateway** | stripe pay |
 | **Styling** | Tailwind CSS |
-| **Deployment** | Vercel / Firebase Hosting |
+| **Deployment** | Vercel |
 
 
 ---
@@ -26,13 +26,13 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 2. Select any product and click **Add to Cart**.  
 3. Go to the **Cart** page and click **Pay Now**.  
 4. Fill in the required (dummy) details such as name, email, and address.  
-5. You will be redirected to the **Razorpay Test Payment** screen.
+5. You will be redirected to the **Stripe pay Test Payment** screen.
 
-#### **Razorpay Test Payment Instructions**
-Since this project uses Razorpay’s test mode:
+#### **Stripe pay Test Payment Instructions**
+Since this project uses Stripe pay’s test mode:
 
 - Choose **Card Payment**
-- Use the Razorpay test card:
+- Use the Stripe pay test card:
   ```
   Card Number: 4111 1111 1111 1111
   Expiry: Any future date
