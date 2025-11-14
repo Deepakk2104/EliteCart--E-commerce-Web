@@ -12,7 +12,7 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 | **Frontend** | React, Vite |
 | **State Management** | Redux |
 | **Backend / Database** | Firebase (Auth, Firestore) |
-| **Payment Gateway** | stripe pay |
+| **Payment Gateway** | Stripe pay |
 | **Styling** | Tailwind CSS |
 | **Deployment** | Vercel |
 
