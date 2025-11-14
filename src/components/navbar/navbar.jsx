@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillCloudSunFill } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
@@ -12,12 +12,14 @@ export default function Navbar() {
   const context = useContext(myContext);
   const { toggleMode, mode } = context;
 
+  const navigate = useNavigate(); // NEW
   const user = JSON.parse(localStorage.getItem("user"));
   const cartItems = useSelector((state) => state.cart);
 
+  // UPDATED LOGOUT FUNCTION — NO FULL PAGE RELOAD
   const logout = () => {
     localStorage.removeItem("user");
-    window.location.href = "/login";
+    navigate("/", { replace: true }); // Go to home safely
   };
 
   return (
@@ -94,13 +96,13 @@ export default function Navbar() {
                   )}
 
                   {user ? (
-                    <a
+                    <button
                       onClick={logout}
                       className="text-sm font-medium block cursor-pointer"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
                       Logout
-                    </a>
+                    </button>
                   ) : (
                     <Link
                       to="/login"
@@ -113,13 +115,13 @@ export default function Navbar() {
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="#" className="-m-2 flex items-center p-2">
+                  <div className="-m-2 flex items-center p-2">
                     <img
                       src="https://i.postimg.cc/vmWP1sFR/1721560431160.png"
                       alt="Elitecart logo"
                       className="block h-auto w-48 flex-shrink-0"
                     />
-                  </a>
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -187,7 +189,7 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Desktop Menu Links */}
+            {/* Desktop Menu */}
             <div className="ml-auto flex items-center">
               <div className="hidden lg:flex lg:items-center lg:space-x-6">
                 <Link
@@ -219,13 +221,13 @@ export default function Navbar() {
                 )}
 
                 {user ? (
-                  <a
+                  <button
                     className="text-sm font-medium text-gray-700 cursor-pointer"
                     style={{ color: mode === "dark" ? "white" : "" }}
                     onClick={logout}
                   >
                     Logout
-                  </a>
+                  </button>
                 ) : (
                   <Link
                     to="/login"
@@ -237,7 +239,7 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Theme toggle */}
+              {/* Theme Toggle */}
               <div className="flex lg:ml-6">
                 <button onClick={toggleMode}>
                   {mode === "light" ? (
