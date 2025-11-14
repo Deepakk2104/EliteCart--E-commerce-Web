@@ -5,16 +5,26 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 
 ---
 
-## **Badges**
+## **Tech Stack**
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Frontend-React-%2361DAFB?style=flat" />
-  <img src="https://img.shields.io/badge/Build-Vite-646CFF?style=flat" />
-  <img src="https://img.shields.io/badge/State-Redux-764abc?style=flat" />
-  <img src="https://img.shields.io/badge/Backend-Firebase-FFCA28?style=flat" />
-  <img src="https://img.shields.io/badge/Payments-Razorpay-0C8AFF?style=flat" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat" />
-</p>
+### **Frontend**
+- React  
+- Vite  
+- Tailwind CSS  
+
+### **State Management**
+- Redux  
+
+### **Backend / Database**
+- Firebase Authentication  
+- Firebase Firestore  
+
+### **Payments**
+- Razorpay (Test Mode Integration)  
+
+### **Deployment**
+- Vercel
+
 
 ---
 
