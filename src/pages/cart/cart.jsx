@@ -5,7 +5,7 @@ import Modal from "../../components/modal/modal";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart, clearCart } from "../../redux/cartslice";
 import { addDoc, collection } from "firebase/firestore";
-import { fireDB } from "../../firebase/firebaseConfig";
+import { fireDB } from "../../firebase/firebaseconfig";
 
 function Cart() {
   const context = useContext(myContext);
