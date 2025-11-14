@@ -5,18 +5,60 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 
 ---
 
-## **Badges**
+## **Tech Stack**
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Frontend-React-%2361DAFB?style=flat" />
-  <img src="https://img.shields.io/badge/Build-Vite-646CFF?style=flat" />
-  <img src="https://img.shields.io/badge/State-Redux-764abc?style=flat" />
-  <img src="https://img.shields.io/badge/Backend-Firebase-FFCA28?style=flat" />
-  <img src="https://img.shields.io/badge/Payments-Razorpay-0C8AFF?style=flat" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat" />
-</p>
+| Category | Technologies |
+|----------|-----------------------------|
+| **Frontend** | React, Vite |
+| **State Management** | Redux |
+| **Backend / Database** | Firebase (Auth, Firestore) |
+| **Payment Gateway** | Razorpay |
+| **Styling** | Tailwind CSS |
+| **Deployment** | Vercel / Firebase Hosting |
+
 
 ---
+
+## **How to Use**
+
+### **For Users**
+1. Browse products on the homepage.  
+2. Select any product and click **Add to Cart**.  
+3. Go to the **Cart** page and click **Pay Now**.  
+4. Fill in the required (dummy) details such as name, email, and address.  
+5. You will be redirected to the **Razorpay Test Payment** screen.
+
+#### **Razorpay Test Payment Instructions**
+Since this project uses Razorpay’s test mode:
+
+- Choose **Card Payment**
+- Use the Razorpay test card:
+  ```
+  Card Number: 4111 1111 1111 1111
+  Expiry: Any future date
+  CVV: 123
+  ```
+- Complete the mock OTP → Payment will show **Success**.
+
+After successful payment, you'll see the confirmation page, and your order will be saved.
+
+---
+
+### **For Admins**
+To access the admin dashboard:
+
+- **Email:** `testadmin@gmail.com`
+- **Password:** `12345678`
+
+Logging in with these credentials gives full access to the **Admin Dashboard**, where you can:
+
+- Add new products  
+- Edit or delete existing products  
+- Manage orders  
+- View real-time user & order data  
+
+---
+
 
 ## **Live Demo**
 
@@ -27,7 +69,7 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 Add a short GIF showing Homepage → Product → Cart → Payment → Success.
 
 ```
-![Demo GIF](./demo/demo.gif)
+
 ```
 
 --
