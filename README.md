@@ -18,6 +18,47 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 
 ---
 
+## **How to Use**
+
+### **For Users**
+1. Browse products on the homepage.  
+2. Select any product and click **Add to Cart**.  
+3. Go to the **Cart** page and click **Pay Now**.  
+4. Fill in the required (dummy) details such as name, email, and address.  
+5. You will be redirected to the **Razorpay Test Payment** screen.
+
+#### **Razorpay Test Payment Instructions**
+Since this project uses Razorpay’s test mode:
+
+- Choose **Card Payment**
+- Use the Razorpay test card:
+  ```
+  Card Number: 4111 1111 1111 1111
+  Expiry: Any future date
+  CVV: 123
+  ```
+- Complete the mock OTP → Payment will show **Success**.
+
+After successful payment, you'll see the confirmation page, and your order will be saved.
+
+---
+
+### **For Admins**
+To access the admin dashboard:
+
+- **Email:** `testadmin@gmail.com`
+- **Password:** `12345678`
+
+Logging in with these credentials gives full access to the **Admin Dashboard**, where you can:
+
+- Add new products  
+- Edit or delete existing products  
+- Manage orders  
+- View real-time user & order data  
+
+---
+
+
 ## **Live Demo**
 
 ## **Website:** https://elite-cart-e-commerce-web.vercel.app/
@@ -27,7 +68,7 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 Add a short GIF showing Homepage → Product → Cart → Payment → Success.
 
 ```
-![Demo GIF](./demo/demo.gif)
+
 ```
 
 --
