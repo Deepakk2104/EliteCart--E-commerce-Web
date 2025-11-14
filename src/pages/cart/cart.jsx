@@ -3,7 +3,9 @@ import myContext from "../../context/data/myContext";
 import Layout from "../../components/layout/layout";
 import Modal from "../../components/modal/modal";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart } from "../../redux/cartslice";
+import { deleteFromCart, clearCart } from "../../redux/cartslice";
+import { addDoc, collection } from "firebase/firestore";
+import { fireDB } from "../../firebase/firebaseConfig";
 
 function Cart() {
   const context = useContext(myContext);
@@ -12,7 +14,6 @@ function Cart() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
 
-  // Scroll to top when Cart loads
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -22,12 +23,10 @@ function Cart() {
     toastr.success("Item deleted from cart");
   };
 
-  // Save to localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Calculate total amount
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -46,6 +45,9 @@ function Cart() {
   const [pincode, setPincode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const stripeCheckoutLink =
+    "https://buy.stripe.com/test_cNifZhffv6PcgAb9xa9bO00";
+
   const buyNow = async () => {
     if (!name || !address || !pincode || !phoneNumber) {
       return toast.error("All fields are required");
@@ -63,43 +65,32 @@ function Cart() {
       }),
     };
 
-    var options = {
-      key: "rzp_test_V89JBXB2PKeyLQ",
-      amount: grandTotal * 100,
-      currency: "INR",
-      name: "EliteCart",
-      description: "Test Payment",
-      handler: function (response) {
-        toast.success("Payment Successful");
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const email = userData?.user?.email || "guest@example.com";
+    const userid = userData?.user?.uid || "guest";
 
-        const paymentId = response.razorpay_payment_id;
-
-        const orderInfo = {
-          cartItems,
-          addressInfo,
-          date: new Date().toLocaleString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          }),
-          email: JSON.parse(localStorage.getItem("user")).user.email,
-          userid: JSON.parse(localStorage.getItem("user")).user.uid,
-          paymentId,
-        };
-
-        try {
-          addDoc(collection(fireDB, "orders"), orderInfo);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      theme: {
-        color: "#3399cc",
-      },
+    const orderInfo = {
+      cartItems,
+      addressInfo,
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+      email,
+      userid,
+      paymentId: "stripe_test_payment",
     };
 
-    var pay = new window.Razorpay(options);
-    pay.open();
+    try {
+      await addDoc(collection(fireDB, "orders"), orderInfo);
+      dispatch(clearCart());
+      localStorage.removeItem("cart");
+    } catch (error) {
+      console.log(error);
+    }
+
+    window.location.href = stripeCheckoutLink;
   };
 
   return (
@@ -114,7 +105,6 @@ function Cart() {
         <h1 className="mb-10 text-center text-3xl font-bold">Your Cart</h1>
 
         <div className="mx-auto max-w-6xl px-6 md:flex md:space-x-6">
-          {/* LEFT SIDE - CART ITEMS */}
           <div className="md:w-2/3 space-y-6">
             {cartItems.length === 0 ? (
               <p className="text-center text-lg">Your cart is empty.</p>
@@ -154,7 +144,6 @@ function Cart() {
             )}
           </div>
 
-          {/* RIGHT SIDE - PRICE SUMMARY */}
           <div
             className="mt-10 md:mt-0 md:w-1/3 h-fit rounded-lg border bg-white p-6 shadow-lg"
             style={{
