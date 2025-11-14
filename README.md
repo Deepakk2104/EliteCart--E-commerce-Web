@@ -7,23 +7,14 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 
 ## **Tech Stack**
 
-### **Frontend**
-- React  
-- Vite  
-- Tailwind CSS  
-
-### **State Management**
-- Redux  
-
-### **Backend / Database**
-- Firebase Authentication  
-- Firebase Firestore  
-
-### **Payments**
-- Razorpay (Test Mode Integration)  
-
-### **Deployment**
-- Vercel
+| Category | Technologies |
+|----------|-----------------------------|
+| **Frontend** | React, Vite |
+| **State Management** | Redux |
+| **Backend / Database** | Firebase (Auth, Firestore) |
+| **Payment Gateway** | Razorpay |
+| **Styling** | Tailwind CSS |
+| **Deployment** | Vercel / Firebase Hosting |
 
 
 ---
