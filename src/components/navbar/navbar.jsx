@@ -12,19 +12,18 @@ export default function Navbar() {
   const context = useContext(myContext);
   const { toggleMode, mode } = context;
 
-  const navigate = useNavigate(); // NEW
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const cartItems = useSelector((state) => state.cart);
 
-  // UPDATED LOGOUT FUNCTION — NO FULL PAGE RELOAD
   const logout = () => {
     localStorage.removeItem("user");
-    navigate("/", { replace: true }); // Go to home safely
+    navigate("/", { replace: true });
   };
 
   return (
     <div className="bg-white sticky top-0 z-50">
-      {/* Mobile menu */}
+      {/* MOBILE MENU */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
           <Transition.Child
@@ -52,7 +51,7 @@ export default function Navbar() {
               <Dialog.Panel
                 className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl"
                 style={{
-                  backgroundColor: mode === "dark" ? "rgb(40, 44, 52)" : "",
+                  backgroundColor: mode === "dark" ? "rgb(40,44,52)" : "",
                   color: mode === "dark" ? "white" : "",
                 }}
               >
@@ -62,11 +61,11 @@ export default function Navbar() {
                     className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
                     onClick={() => setOpen(false)}
                   >
-                    <span className="sr-only">Close menu</span>
                     <RxCross2 />
                   </button>
                 </div>
 
+                {/* MOBILE LINKS */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <Link
                     to="/allproducts"
@@ -76,23 +75,15 @@ export default function Navbar() {
                     Products
                   </Link>
 
+                  {/* ADMIN ONLY LINKS (NO ORDERS) */}
                   {user?.user?.email === "testadmin@gmail.com" && (
-                    <>
-                      <Link
-                        to="/order"
-                        className="text-sm font-medium block"
-                        style={{ color: mode === "dark" ? "white" : "" }}
-                      >
-                        Orders
-                      </Link>
-                      <Link
-                        to="/dashboard"
-                        className="text-sm font-medium block"
-                        style={{ color: mode === "dark" ? "white" : "" }}
-                      >
-                        Admin
-                      </Link>
-                    </>
+                    <Link
+                      to="/dashboard"
+                      className="text-sm font-medium block"
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Admin
+                    </Link>
                   )}
 
                   {user ? (
@@ -129,7 +120,7 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
-      {/* Desktop Navbar */}
+      {/* DESKTOP NAVBAR */}
       <header className="relative bg-white">
         <p
           className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
@@ -150,7 +141,7 @@ export default function Navbar() {
           }}
         >
           <div className="flex h-16 items-center">
-            {/* Mobile Menu Button */}
+            {/* MOBILE MENU BUTTON */}
             <button
               type="button"
               className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
@@ -160,7 +151,6 @@ export default function Navbar() {
                 color: mode === "dark" ? "white" : "",
               }}
             >
-              <span className="sr-only">Open menu</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -177,7 +167,7 @@ export default function Navbar() {
               </svg>
             </button>
 
-            {/* Logo */}
+            {/* LOGO */}
             <div className="ml-4 flex lg:ml-0">
               <Link to="/" className="flex">
                 <h1
@@ -189,40 +179,31 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Desktop Menu */}
+            {/* DESKTOP MENU */}
             <div className="ml-auto flex items-center">
               <div className="hidden lg:flex lg:items-center lg:space-x-6">
                 <Link
                   to="/allproducts"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-sm font-medium"
                   style={{ color: mode === "dark" ? "white" : "" }}
                 >
                   Products
                 </Link>
 
+                {/* ADMIN ONLY (NO ORDERS) */}
                 {user?.user?.email === "testadmin@gmail.com" && (
-                  <>
-                    <Link
-                      to="/order"
-                      className="text-sm font-medium text-gray-700"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      Orders
-                    </Link>
-
-                    <Link
-                      to="/dashboard"
-                      className="text-sm font-medium text-gray-700"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      Admin
-                    </Link>
-                  </>
+                  <Link
+                    to="/dashboard"
+                    className="text-sm font-medium"
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    Admin
+                  </Link>
                 )}
 
                 {user ? (
                   <button
-                    className="text-sm font-medium text-gray-700 cursor-pointer"
+                    className="text-sm font-medium cursor-pointer"
                     style={{ color: mode === "dark" ? "white" : "" }}
                     onClick={logout}
                   >
@@ -231,7 +212,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     to="/login"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-medium"
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     Login
@@ -239,7 +220,7 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Theme Toggle */}
+              {/* THEME TOGGLE */}
               <div className="flex lg:ml-6">
                 <button onClick={toggleMode}>
                   {mode === "light" ? (
@@ -250,7 +231,7 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Cart */}
+              {/* CART ICON */}
               <div className="ml-4 flow-root lg:ml-6">
                 <Link
                   to="/cart"
@@ -273,12 +254,11 @@ export default function Navbar() {
                   </svg>
 
                   <span
-                    className="ml-2 text-sm font-medium text-gray-700"
+                    className="ml-2 text-sm font-medium"
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
                     {cartItems.length}
                   </span>
-                  <span className="sr-only">items in cart</span>
                 </Link>
               </div>
             </div>
