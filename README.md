@@ -64,16 +64,6 @@ Logging in with these credentials gives full access to the **Admin Dashboard**, 
 
 ## **Website:** https://elite-cart-e-commerce-web.vercel.app/
 
-## **Demo (GIF)**
-
-Add a short GIF showing Homepage → Product → Cart → Payment → Success.
-
-```
-
-```
-
---
-
 ## **Features**
 
 ### **User Side**
