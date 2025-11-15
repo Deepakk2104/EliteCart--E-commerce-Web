@@ -7,28 +7,29 @@ Designed for speed, reliability, and a smooth shopping experience — includes a
 
 ## **Tech Stack**
 
-| Category | Technologies |
-|----------|-----------------------------|
-| **Frontend** | React, Vite |
-| **State Management** | Redux |
+| Category               | Technologies               |
+| ---------------------- | -------------------------- |
+| **Frontend**           | React, Vite                |
+| **State Management**   | Redux                      |
 | **Backend / Database** | Firebase (Auth, Firestore) |
-| **Payment Gateway** | Stripe pay |
-| **Styling** | Tailwind CSS |
-| **Deployment** | Vercel |
-
+| **Payment Gateway**    | Stripe pay                 |
+| **Styling**            | Tailwind CSS               |
+| **Deployment**         | Vercel                     |
 
 ---
 
 ## **How to Use**
 
 ### **For Users**
-1. Browse products on the homepage.  
-2. Select any product and click **Add to Cart**.  
-3. Go to the **Cart** page and click **Pay Now**.  
-4. Fill in the required (dummy) details such as name, email, and address.  
+
+1. Browse products on the homepage.
+2. Select any product and click **Add to Cart**.
+3. Go to the **Cart** page and click **Pay Now**.
+4. Fill in the required (dummy) details such as name, email, and address.
 5. You will be redirected to the **Stripe pay Test Payment** screen.
 
 #### **Stripe pay Test Payment Instructions**
+
 Since this project uses Stripe pay’s test mode:
 
 - Choose **Card Payment**
@@ -45,6 +46,7 @@ After successful payment, you'll see the confirmation page, and your order will 
 ---
 
 ### **For Admins**
+
 To access the admin dashboard:
 
 - **Email:** `testadmin@gmail.com`
@@ -52,13 +54,12 @@ To access the admin dashboard:
 
 Logging in with these credentials gives full access to the **Admin Dashboard**, where you can:
 
-- Add new products  
-- Edit or delete existing products  
-- Manage orders  
-- View real-time user & order data  
+- Add new products
+- Edit or delete existing products
+- Manage orders
+- View real-time user & order data
 
 ---
-
 
 ## **Live Demo**
 
@@ -98,7 +99,7 @@ Replace with your actual screenshots:
 
 ```
 ![Screenshot - Login](./screenshots/login.png)
-![Screenshot - Products](./screenshots/products.png)
+![Screenshot - Cart](./screenshots/products.png)
 ![Screenshot - Payment](./screenshots/payment.png)
 ![Screenshot - Admin Dashboard](./screenshots/admin.png)
 ```
