@@ -93,19 +93,6 @@ Logging in with these credentials gives full access to the **Admin Dashboard**, 
 
 ---
 
-## **Screenshots**
-
-Replace with your actual screenshots:
-
-```
-![Screenshot - Login](https://github.com/Deepakk2104/EliteCart--E-commerce-Web/blob/main/screenshots/login.png)
-![Screenshot - Cart](./screenshots/products.png)
-![Screenshot - Payment](./screenshots/payment.png)
-![Screenshot - Admin Dashboard](./screenshots/admin.png)
-```
-
----
-
 ## **Getting Started**
 
 ### **1. Clone the repo**
